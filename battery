@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# $BLOCK_INSTANCE will correspond to battery instance number
+#$1 will be a flag to report with icon
+#$2 will be a flag to report battery percentage back
+#$3 will be a flag to report battery percentage back
+
+[[ ! -z $BLOCK_INSTANCE ]] && battery_instance=$BLOCK_INSTANCE || battery_instance=0
+
+battery_capacity=$(cat /sys/class/power_supply/BAT${battery_instance}/capacity)
+battery_status=$(cat /sys/class/power_supply/BAT${battery_instance}/status)
+
+if [ $1 -eq 1 ]; then
+	if [ $battery_status = "Full" ]; then
+		battery_text=' ' && color="A8FF00"
+	elif [ $battery_status = "Unknown" ]; then
+		battery_text=' ' && color="FFFFFF"
+	elif [ $battery_status = "Discharging" ]; then
+		((battery_capacity <= 5)) &&
+			battery_text=' ' && color="FF0000"
+		((battery_capacity > 5 && battery_capacity <=25)) &&
+			battery_text=' ' && color="#FFFF00"
+		((battery_capacity > 25 && battery_capacity <=50)) &&
+			battery_text=' ' && color="FFAE00"
+		((battery_capacity > 50 && battery_capacity <=75)) &&
+			battery_text=' ' && color="FFF600"
+		((battery_capacity > 75 && battery_capacity <=100)) &&
+			battery_text=' ' && color="A8FF00"
+	elif [ $battery_status = "Charging" ]; then
+		battery_text+=' '
+	fi
+else
+	if [ $battery_status = "Full" ]; then
+		battery_text="Full " && color="A8FF00"
+	elif [ $battery_status = "Unknown" ]; then
+		battery_text="UNK " && color="FFFFFF"
+	elif [ $battery_status = "Discharging" ]; then
+		battery_text+="DIS "
+	elif [ $battery_status = "Charging" ]; then
+		battery_text+="CHR"
+	fi
+fi
+
+if [ $2 -eq 1 ]; then
+	battery_text+=${battery_capacity}%
+fi
+
+
+echo $battery_text
+echo $battery_text
+if [ $3 -eq 1 ]; then echo $color; fi
+
+
