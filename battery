@@ -12,7 +12,7 @@ battery_status=$(cat /sys/class/power_supply/BAT${battery_instance}/status)
 
 if [ $1 -eq 1 ]; then
 	if [ $battery_status = "Full" ]; then
-		battery_text=' ' && color="A8FF00"
+		battery_text=' ' && color="FFFFFF"
 	elif [ $battery_status = "Unknown" ]; then
 		battery_text=' ' && color="FFFFFF"
 	elif [ $battery_status = "Discharging" ]; then
@@ -27,11 +27,20 @@ if [ $1 -eq 1 ]; then
 		((battery_capacity > 75 && battery_capacity <=100)) &&
 			battery_text=' ' && color="A8FF00"
 	elif [ $battery_status = "Charging" ]; then
-		battery_text+=' '
+		((battery_capacity <= 5)) &&
+			battery_text=' ' && color="FF0000"
+		((battery_capacity > 5 && battery_capacity <=25)) &&
+			battery_text=' ' && color="#FFFF00"
+		((battery_capacity > 25 && battery_capacity <=50)) &&
+			battery_text=' ' && color="FFAE00"
+		((battery_capacity > 50 && battery_capacity <=75)) &&
+			battery_text=' ' && color="FFF600"
+		((battery_capacity > 75 && battery_capacity <=100)) &&
+			battery_text=' ' && color="A8FF00"
 	fi
 else
 	if [ $battery_status = "Full" ]; then
-		battery_text="Full " && color="A8FF00"
+		battery_text="Full " && color="FFFFFF"
 	elif [ $battery_status = "Unknown" ]; then
 		battery_text="UNK " && color="FFFFFF"
 	elif [ $battery_status = "Discharging" ]; then
@@ -44,7 +53,6 @@ fi
 if [ $2 -eq 1 ]; then
 	battery_text+=${battery_capacity}%
 fi
-
 
 echo $battery_text
 echo $battery_text
