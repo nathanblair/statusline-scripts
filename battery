@@ -19,7 +19,7 @@ if [ $1 -eq 1 ]; then
 		((battery_capacity <= 5)) &&
 			battery_text=' ' && color="FF0000"
 		((battery_capacity > 5 && battery_capacity <=25)) &&
-			battery_text=' ' && color="#FFFF00"
+			battery_text=' ' && color="FFF6000"
 		((battery_capacity > 25 && battery_capacity <=50)) &&
 			battery_text=' ' && color="FFAE00"
 		((battery_capacity > 50 && battery_capacity <=75)) &&
@@ -30,7 +30,7 @@ if [ $1 -eq 1 ]; then
 		((battery_capacity <= 5)) &&
 			battery_text=' ' && color="FF0000"
 		((battery_capacity > 5 && battery_capacity <=25)) &&
-			battery_text=' ' && color="#FFFF00"
+			battery_text=' ' && color="FF6000"
 		((battery_capacity > 25 && battery_capacity <=50)) &&
 			battery_text=' ' && color="FFAE00"
 		((battery_capacity > 50 && battery_capacity <=75)) &&
