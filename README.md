@@ -1,11 +1,12 @@
 # statusline-scripts
 A collection of my statusline scripts used in (for now) i3blocks
 
-**Requires use of FontAwesome glyphs**
-
 ## Requirements
-- acpi
-- bc
+- bc (for math related functions - brightness, battery, etc.)
+
+## Optional
+- acpi (for battery)
+- FontAwesome (for glyphs)
 
 ## Includes
 - battery
