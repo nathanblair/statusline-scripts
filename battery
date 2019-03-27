@@ -61,4 +61,3 @@ echo "$battery_text $battery_time"
 echo $battery_text
 if [ $3 -eq 1 ]; then echo $color; fi
 
-

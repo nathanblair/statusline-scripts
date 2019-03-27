@@ -10,8 +10,6 @@ A collection of my statusline scripts used in (for now) i3blocks
 
 ## Includes
 - battery
-- volume
-- brightness
 
 **Screenshot to come!**
 
