@@ -55,7 +55,7 @@ else
 fi
 
 if [[ $3 -eq 1 ]]; then
-    battery_text+=${battery_capacity}%
+    battery_text+=${battery_capacity}
 fi
 
 echo "$battery_text $battery_time"
