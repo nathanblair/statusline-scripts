@@ -13,9 +13,9 @@ elif [ $battery_status = "Unknown" ]; then
 elif [ $battery_status = "Charging" ]; then
     icon=' ' && class="CHR"
 elif [ $battery_status = "Discharging" ]; then
-    ((battery_capacity <= 5)) &&
+    ((battery_capacity <= 15)) &&
         icon=' ' && class="CRI"
-    ((battery_capacity > 5 && battery_capacity <=25)) &&
+    ((battery_capacity > 15 && battery_capacity <=25)) &&
         icon=' ' && class="DIS"
     ((battery_capacity > 25 && battery_capacity <=50)) &&
         icon=' ' && class="DIS"
