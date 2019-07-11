@@ -3,5 +3,5 @@
 artist=$(playerctl metadata artist)
 title=$(playerctl metadata title)
 icon=
-printf '{"text":"%s","tooltip":"%s - %s","class":"","percentage":0}\n' $icon $artist $title
+printf '{"text":"%s","tooltip":"%s - %s","class":"","percentage":0}\n' $icon "$artist" "$title"
 
