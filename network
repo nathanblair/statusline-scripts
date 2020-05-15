@@ -1,0 +1,17 @@
+#!/bin/sh
+
+disconnected_icon="",
+ethernet_icon="",
+wireless_icon=""
+
+# TODO Get the connection type
+# TODO Get the ssid
+# TODO Assign class to...what?
+# TODO Get signal strength
+
+icon=$wireless_icon
+ssid='Sonic'
+status='connected'
+strength=50
+
+printf '{"text":"%s","tooltip":"%s","class":"%s","percentage":%s}\n' $icon $ssid $status $strength
