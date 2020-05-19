@@ -1,0 +1,10 @@
+#!/bin/bash
+
+text=$(date +'%a %D %_I:%M %p')
+#tooltip=$(cal -3)
+tooltip=""
+class=""
+percentage=""
+
+printf '{"text":"%s","tooltip":"%s","class":"%s","percentage":"%s"}\n' \
+  "$text" "$tooltip" "$class" "$capacity"
