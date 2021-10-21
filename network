@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 disconnected_icon="",
 ethernet_icon="",

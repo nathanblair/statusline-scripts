@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 text=$(date +'%a %D %_I:%M %p')
 #tooltip=$(cal -3)

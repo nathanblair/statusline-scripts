@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 volume=$(amixer sget Master | awk -F '[][]' 'BEGIN { RS="" } { print $2 }')
 volume=${volume%\%}
