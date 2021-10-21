@@ -2,28 +2,41 @@
 
 #$1 is the battery instance
 
-[[ ! -z $1 ]] && instance=$1 || instance=0
+instance=0
+if [ $# -gt 0 ]; then
+  instance=$1
+fi
 
 capacity=$(cat /sys/class/power_supply/BAT${instance}/capacity)
 status=$(cat /sys/class/power_supply/BAT${instance}/status)
 
 class="DIS"
-((capacity > 75 && capacity <=100)) && icon=' '
-((capacity > 50 && capacity <=75)) && icon=' '
-((capacity > 25 && capacity <=50)) && icon=' '
-((capacity > 15 && capacity <=25)) && icon=' '
-((capacity <= 15)) && icon=' ' && class="CRI"
+icon=' '
+if [ "${capacity}" -gt 75 -a "${capacity}" -le 100 ]; then
+  icon=' '
+elif [ "${capacity}" -gt 50 -a "${capacity}" -le 75 ]; then
+  icon=' '
+elif [ "${capacity}" -gt 25 -a "${capacity}" -le 50 ]; then
+  icon=' '
+elif [ "${capacity}" -gt 15 -a "${capacity}" -le 25 ]; then
+  icon=' '
+elif [ "${capacity}" -lt 15 ]; then
+  class="CRI"
+fi
 
 if [ $status = "Charging" ]; then
-    class="CHR"
+  class="CHR"
 elif [ $status = "Full" ]; then
-    class="FULL"
+  class="FULL"
 elif [ $status = "Unknown" ]; then
-    class="UNK"
+  class="UNK"
 fi
-time=$(acpi -b | awk -v acpi_bat_num=$((instance + 1)) \
-  'NR == acpi_bat_num {print $5}')
-(( ${#time} == 0 )) && time="-"
+
+time=$(acpi -b | awk -v acpi_bat_num=$((instance + 1)) 'NR == acpi_bat_num {print $5}')
+
+if [ "${#time}" -eq 0 ]; then
+  time="-"
+fi
 
 printf '{"text":"%s","tooltip":"%s%% (%s)","class":"%s","percentage":%s}\n' \
   $icon $capacity $time $class $capacity
