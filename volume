@@ -4,11 +4,17 @@ volume=$(amixer sget Master | awk -F '[][]' 'BEGIN { RS="" } { print $2 }')
 volume=${volume%\%}
 muted=$(amixer sget Master | awk -F '[][]' 'BEGIN { RS="" } { print $6 }')
 
-(( volume > 1 )) && icon=
-(( volume > 20 )) && icon=
-#(( volume > 50 )) && icon=
-(( volume > 90 )) && icon=
-(( volume <= 1 )) || [[ $muted == 'off' ]] && icon=
+if [ "${volume}" -gt 1 ]; then
+  icon=
+elif [ "${volume}" -gt 20 ]; then 
+  icon=
+#elif [ "${volume}" -gt 50 ]; then 
+  #icon=
+elif [ "${volume}" -gt 90 ]; then 
+  icon=
+elif [ "${volume}" -le 1 -o "${muted}" == "off" ]; then 
+  icon=
+fi
 
 printf '{"text":"%s","tooltip":"%s%%","class":"%s","percentage":%s}\n' $icon $volume $muted $volume
 
